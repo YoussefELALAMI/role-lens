@@ -1,0 +1,16 @@
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.error {
+  color: #c0392b;
+}

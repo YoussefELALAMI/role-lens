@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: role-lens-postgres
+    environment:
+        POSTGRES_USER: role_lens_user
+        POSTGRES_PASSWORD: role_lens_password
+        POSTGRES_DB: role_lens_db
+    ports:
+      - "5433:5432"
+    volumes:
+        - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U role_lens_user -d role_lens_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+    postgres_data:
