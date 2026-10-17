@@ -1,0 +1,33 @@
+# Java / Maven
+**/target/
+*.class
+*.jar
+hs_err_pid*
+
+# Node / React
+**/node_modules/
+**/dist/
+npm-debug.log*
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Local databases and temporary files
+*.db
+*.sqlite
+*.sqlite3
+
+# Evaluation data
+eval-data/
+evaluation-data/
