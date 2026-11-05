@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public record CvUploadResponse(
         UUID id,
+        String rawText,
         JsonNode atsView,
         JsonNode atsFindings,
         JsonNode profile

@@ -98,6 +98,7 @@ public class CvService {
 
             return new CvUploadResponse(
                     cv.getId(),
+                    cv.getRawText(),
                     result.atsView(),
                     findings,
                     result.profile()
@@ -109,6 +110,7 @@ public class CvService {
 
             return new CvUploadResponse(
                     cv.getId(),
+                    cv.getRawText(),
                     null,
                     previousFindings,
                     null
