@@ -1,16 +1,400 @@
 .page {
-  max-width: 640px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 24px 16px 64px;
+  padding: 40px 24px 96px;
 }
 
+/* Masthead */
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.wordmark svg {
+  color: var(--signal);
+}
+
+.masthead h1 {
+  max-width: 15ch;
+  margin: 56px 0 48px;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+/* The two sheets of paper */
+.desk {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--sheet);
+  border: 1px solid var(--sheet-edge);
+  border-radius: 4px;
+}
+
+.sheet h2,
+.saved h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+/* The CV sheet has a folded corner */
+.sheet-cv {
+  clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+}
+
+.sheet-cv::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(
+    225deg,
+    transparent 49%,
+    var(--sheet-edge) 49% 52%,
+    var(--fold) 52%
+  );
+}
+
+/* CV upload */
+.dropzone {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 240px;
+  padding: 24px;
+  border: 1.5px dashed color-mix(in srgb, var(--muted) 45%, transparent);
+  border-radius: 4px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.dropzone.is-dragging {
+  background: var(--signal-soft);
+  border-color: var(--signal);
+}
+
+.dropzone-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.dropzone-hint {
+  margin: 6px 0 20px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Job ad, on ruled paper */
 textarea {
   display: block;
+  flex: 1;
   width: 100%;
-  box-sizing: border-box;
+  min-height: 252px;
+  padding: 0;
   font: inherit;
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--ink);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 27px,
+    var(--rule) 27px 28px
+  );
+  background-attachment: local;
+  border: 0;
+  border-radius: 0;
+  resize: vertical;
 }
 
+textarea::placeholder {
+  color: var(--muted);
+}
+
+textarea:focus-visible {
+  outline: none;
+}
+
+.sheet-ad:focus-within {
+  border-color: var(--signal);
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+/* Buttons */
+.btn {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-signal {
+  color: var(--on-signal);
+  background: var(--signal);
+}
+
+.btn-signal:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--signal) 85%, var(--ink));
+}
+
+.btn-ink {
+  color: var(--sheet);
+  background: var(--ink);
+}
+
+.btn-ink:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--ink) 80%, var(--signal));
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+}
+
+/* Errors */
 .error {
-  color: #c0392b;
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-left: 3px solid var(--danger);
+  border-radius: 0 4px 4px 0;
+}
+
+/* What an ATS sees: the machine's readout */
+.machine {
+  position: relative;
+  margin-top: 24px;
+  padding: 28px 0 0;
+  overflow: hidden;
+  color: var(--machine-text);
+  background: var(--machine);
+  border: 1px solid var(--machine-edge);
+  border-radius: 4px;
+}
+
+.machine-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 0 28px 20px;
+}
+
+.machine-head h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #f2f6fd;
+}
+
+.machine-sub {
+  margin: 4px 0 0;
+  max-width: 62ch;
+  color: var(--machine-dim);
+  font-size: 15px;
+}
+
+.machine-sub strong {
+  font-weight: 500;
+  color: var(--machine-text);
+  overflow-wrap: anywhere;
+}
+
+.machine-stats {
+  margin: 0;
+  color: var(--machine-dim);
+  font-size: 14px;
+}
+
+.machine-scroll {
+  max-height: 520px;
+  padding: 20px 28px 28px;
+  overflow: auto;
+  border-top: 1px solid var(--machine-edge);
+}
+
+.machine-scroll:focus-visible {
+  outline: 2px solid var(--machine-scan);
+  outline-offset: -2px;
+}
+
+.machine-text {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: line;
+  font: 400 14px/1.75 "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+.machine-text li {
+  display: grid;
+  grid-template-columns: 4ch 1fr;
+  gap: 20px;
+  counter-increment: line;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.machine-text li::before {
+  content: counter(line);
+  text-align: right;
+  color: var(--machine-dim);
+  user-select: none;
+}
+
+/* One sweep when a CV has just been read */
+.machine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -140px;
+  height: 140px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--machine-scan) 30%, transparent));
+  border-bottom: 1px solid var(--machine-scan);
+  animation: scan 1.2s ease-out 1 forwards;
+}
+
+@keyframes scan {
+  to {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .machine::after {
+    display: none;
+  }
+}
+
+/* Saved job ads */
+.saved {
+  margin-top: 56px;
+}
+
+.saved-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--ink);
+}
+
+.saved-head h2 {
+  margin-bottom: 10px;
+}
+
+.saved-count {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.empty {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.saved-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.saved-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--sheet-edge);
+}
+
+.saved-title {
+  font-weight: 600;
+}
+
+.saved-company {
+  margin-left: 12px;
+  color: var(--muted);
+}
+
+.saved-date {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (max-width: 860px) {
+  .desk {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 28px 16px 72px;
+  }
+
+  .masthead h1 {
+    margin: 40px 0 32px;
+  }
+
+  .sheet {
+    padding: 20px;
+  }
+
+  .machine-head,
+  .machine-scroll {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .saved-list li {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .saved-company {
+    display: block;
+    margin-left: 0;
+  }
 }

@@ -17,10 +17,15 @@ export class ApiError extends Error {
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
+  // For FormData the browser must set Content-Type itself, because the value
+  // includes the generated multipart boundary.
+  const defaultHeaders: HeadersInit =
+    init.body instanceof FormData ? {} : { "Content-Type": "application/json" };
+
   const response = await fetch(`${BASE_URL}${path}`, {
     ...init,
     headers: {
-      "Content-Type": "application/json",
+      ...defaultHeaders,
       ...init.headers,
     },
   });
@@ -53,4 +58,7 @@ export const httpClient = {
 
   post: <T>(path: string, body: unknown): Promise<T> =>
     request<T>(path, { method: "POST", body: JSON.stringify(body) }),
+
+  postForm: <T>(path: string, form: FormData): Promise<T> =>
+    request<T>(path, { method: "POST", body: form }),
 };

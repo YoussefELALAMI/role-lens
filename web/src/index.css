@@ -1,8 +1,75 @@
 :root {
-  font: 16px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+  /* The desk and the paper on it */
+  --desk: #e8ecf1;
+  --dot: #c9d1dd;
+  --sheet: #ffffff;
+  --sheet-edge: #cdd5e0;
+  --fold: #dce2eb;
+  --rule: #e4e9f1;
+
+  --ink: #0f1728;
+  --muted: #5a657b;
+
+  /* The single accent: the lens */
+  --signal: #2d3cf5;
+  --on-signal: #ffffff;
+  --signal-soft: #e6e9ff;
+
+  /* The machine's view of the CV */
+  --machine: #0c1424;
+  --machine-edge: #1d2a43;
+  --machine-text: #d7e1f2;
+  --machine-dim: #6a7a98;
+  --machine-scan: #7c93ff;
+
+  --danger: #c5382b;
+  --danger-bg: #fdeceb;
+
+  font: 16px/1.55 "Bricolage Grotesque", system-ui, "Segoe UI", Roboto, sans-serif;
+  font-optical-sizing: auto;
   color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --desk: #090d14;
+    --dot: #19212f;
+    --sheet: #121926;
+    --sheet-edge: #243045;
+    --fold: #1b2536;
+    --rule: #1c2638;
+
+    --ink: #eaf0fa;
+    --muted: #93a0b8;
+
+    --signal: #8c9bff;
+    --on-signal: #0a0f1e;
+    --signal-soft: #1b2145;
+
+    --machine: #04070c;
+    --machine-edge: #1e2a40;
+
+    --danger: #ff9d92;
+    --danger-bg: #2b1716;
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background-color: var(--desk);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Like a highlighter pen */
+::selection {
+  color: #0f1728;
+  background: #ffe45c;
 }
