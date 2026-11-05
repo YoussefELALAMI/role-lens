@@ -10,7 +10,7 @@ npm run dev
 ```
 
 The dev server runs on Vite's default port and proxies `/api/*` requests to
-the backend at `http://localhost:8080` (see `vite.config.ts`), so make sure
+the backend at `http://localhost:8081` (see `vite.config.ts`), so make sure
 the API (`../api`) is running too.
 
 ## Structure
