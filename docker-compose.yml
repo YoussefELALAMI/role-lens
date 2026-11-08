@@ -7,7 +7,7 @@ services:
         POSTGRES_PASSWORD: role_lens_password
         POSTGRES_DB: role_lens_db
     ports:
-      - "5433:5432"
+      - "5433:5432"   # host access for running the API from the IDE
     volumes:
         - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -15,6 +15,30 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+
+  api:
+    build: ./api
+    container_name: role-lens-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Inside the compose network Postgres is on its container port, not 5433.
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/role_lens_db
+      SPRING_DATASOURCE_USERNAME: role_lens_user
+      SPRING_DATASOURCE_PASSWORD: role_lens_password
+      # Taken from your shell or a .env file next to this one; never committed.
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY:-}
+    ports:
+      - "8081:8081"
+
+  web:
+    build: ./web
+    container_name: role-lens-web
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
 
 volumes:
     postgres_data:
