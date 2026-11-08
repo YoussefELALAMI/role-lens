@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["experience", "education", "skills", "languages"],
+  "properties": {
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "employer", "startDate", "endDate", "description"],
+        "properties": {
+          "title": {"type": "string"},
+          "employer": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "startDate": {"type": "string", "description": "YYYY-MM"},
+          "endDate": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "YYYY-MM, null if the CV says the role is current"},
+          "description": {"anyOf": [{"type": "string"}, {"type": "null"}]}
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["degree", "institution", "fieldOfStudy", "startDate", "endDate"],
+        "properties": {
+          "degree": {"type": "string"},
+          "institution": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "fieldOfStudy": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "startDate": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "YYYY-MM"},
+          "endDate": {"anyOf": [{"type": "string"}, {"type": "null"}], "description": "YYYY-MM"}
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "quote"],
+        "properties": {
+          "name": {"type": "string"},
+          "quote": {"type": "string", "description": "One line copied verbatim from the CV that shows the skill"}
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "proficiency"],
+        "properties": {
+          "name": {"type": "string"},
+          "proficiency": {"anyOf": [{"type": "string"}, {"type": "null"}]}
+        }
+      }
+    }
+  }
+}
